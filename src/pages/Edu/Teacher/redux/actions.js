@@ -21,6 +21,7 @@ const getUserListSync = (list) => ({
   data: list,
 });
 
+//异步请求
 export const getUserList = ({ page, limit, username, nickName }) => {
   return (dispatch) => {
     return reqUserList({ page, limit, username, nickName }).then((response) => {

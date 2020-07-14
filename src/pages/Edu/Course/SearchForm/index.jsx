@@ -5,7 +5,7 @@ import "./index.less";
 
 const { Option } = Select;
 
-function SearchForm() {
+function SearchForm () {
   const [form] = Form.useForm();
 
   const [options, setOptions] = useState([

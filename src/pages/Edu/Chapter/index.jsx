@@ -15,19 +15,22 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 import { connect } from "react-redux";
 import SearchForm from "./SearchForm";
+import { getLessonList } from './redux'
 
 import "./index.less";
 
 dayjs.extend(relativeTime);
 
 @connect(
-  (state) => ({
+  state => ({
     // courseList: state.courseList
     // permissionValueList: filterPermissions(
     //   state.course.permissionValueList,
     //   "Course"
     // )
-  })
+    chapterList: state.chapterList
+  }),
+  { getLessonList }
   // { getcourseList }
 )
 class Chapter extends Component {
@@ -53,9 +56,10 @@ class Chapter extends Component {
     });
   };
 
-  componentDidMount() {
+  componentDidMount () {
     // const { page, limit } = this.state;
     // this.handleTableChange(page, limit);
+    console.log(this.props)
   }
 
   handleTableChange = (page, limit) => {
@@ -88,9 +92,17 @@ class Chapter extends Component {
     this.setState({
       selectedRowKeys,
     });
+
   };
 
-  render() {
+  //
+  handleClickExpand = async (expand, record) => {
+    if (expand) {
+      await this.props.getLessonList(record._id)
+    }
+  }
+
+  render () {
     const { previewVisible, previewImage, selectedRowKeys } = this.state;
 
     const columns = [
@@ -247,7 +259,6 @@ class Chapter extends Component {
       //   }
       // ]
     };
-
     return (
       <div>
         <div className="course-search">
@@ -290,11 +301,14 @@ class Chapter extends Component {
           <Table
             rowSelection={rowSelection}
             columns={columns}
-            dataSource={data}
-            rowKey="id"
+            dataSource={this.props.chapterList.items}
+            rowKey="_id"
+            expandable={{
+              onExpand: this.handleClickExpand
+            }}
           />
         </div>
-
+        {/* this.props.chapterList.items */}
         <Modal
           visible={previewVisible}
           footer={null}

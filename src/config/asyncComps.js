@@ -19,6 +19,8 @@ const Chapter = () => lazy(() => import("@pages/Edu/Chapter"));
 const Comment = () => lazy(() => import("@pages/Edu/Comment"));
 const Course = () => lazy(() => import("@pages/Edu/Course"));
 const Subject = () => lazy(() => import("@pages/Edu/Subject"));
+//新建subject
+const AddSubject = () => lazy(() => import("@pages/Edu/Subject/components/AddSubject"));
 const Teacher = () => lazy(() => import("@pages/Edu/Teacher"));
 const Settings = () => lazy(() => import("@pages/User/Settings"));
 const Center = () => lazy(() => import("@pages/User/Center"));
@@ -38,5 +40,6 @@ export default {
   Teacher,
   Settings,
   Center,
-  Subject
+  Subject,
+  AddSubject
 };
