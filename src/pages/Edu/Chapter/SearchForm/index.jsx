@@ -22,6 +22,7 @@ function SearchForm (props) {
   useEffect(() => {
     async function fetchState () {
       const res = await reqGetCourseList()
+      console.log(res)
       setCourseList(res)
     }
     fetchState()
@@ -35,9 +36,8 @@ function SearchForm (props) {
       limit: 10,
       courseId: value.courseId
     }
-    const res = await props.getChapterList(data)
+    await props.getChapterList(data)
     message.success('课程章节列表数据获取成功')
-    console.log(res)
   }
 
   return (
@@ -69,6 +69,3 @@ function SearchForm (props) {
 }
 
 export default connect(null, { getChapterList })(SearchForm)
-
-
-//第一次没渲染 给个空数组
